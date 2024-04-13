@@ -5,7 +5,7 @@
 			<value>BottleGrab</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{a9d7bf82-3ee4-4896-a5be-609d49b9ad42}</destination>
@@ -82,7 +82,11 @@
 			<destination>{6b0f3822-6ccb-4315-a3de-ed951de5793a}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{b7f07e78-97af-40e5-92f9-ef785618bdfa}" />
+	<object class="MultiSound" id="{b7f07e78-97af-40e5-92f9-ef785618bdfa}">
+		<relationship name="sounds">
+			<destination>{ee10958a-5c99-41b0-938b-a5e690530a15}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{e8e48e2c-9565-4229-a3c3-6b7459302ff1}">
 		<relationship name="effects">
 			<destination>{7db7fc3c-bf54-4a8d-8e51-d948b02f21f2}</destination>
@@ -95,6 +99,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{a6a66d95-dede-499f-bb64-2a4655f6c9c3}" />
+	<object class="SingleSound" id="{ee10958a-5c99-41b0-938b-a5e690530a15}">
+		<relationship name="audioFile">
+			<destination>{d833c749-dc66-4a2d-aab3-20ce8be5361e}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{7db7fc3c-bf54-4a8d-8e51-d948b02f21f2}" />
 	<object class="MixerBusFader" id="{c77098c8-2ea2-47cb-91eb-903dc1537411}" />
 </objects>
