@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5f; // Vitesse de déplacement du joueur
+    public Vector3 maxSpeed;
+    public float acceleration = 1000f; // Vitesse de dÃ©placement du joueur
 
     public float lerpingMovement;
 
     public float jumpForce = 10f; // Force de saut du joueur
-    public Transform groundCheck; // Référence au GameObject qui vérifie si le joueur touche le sol
-    public LayerMask groundMask; // Masque de la couche représentant le sol
+    public Transform groundCheck; // RÃ©fÃ©rence au GameObject qui vÃ©rifie si le joueur touche le sol
+    public LayerMask groundMask; // Masque de la couche reprÃ©sentant le sol
 
     Vector2 inputMovement;
     Vector3 moveDirection;
 
+    public float decreaseMovement = 2;
+    
+    
     private Rigidbody rb;
     private bool isGrounded;
 
@@ -35,24 +39,38 @@ public class PlayerController : MonoBehaviour
     {
         float dt = Time.fixedDeltaTime;
 
-        // Vérifie si le joueur touche le sol
+        // VÃ©rifie si le joueur touche le sol
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundMask);
 
-        // Déplacement horizontal
+        // DÃ©placement horizontal
         float horizontalInput = inputMovement.x;
         float verticalInput = inputMovement.y;
         moveDirection = Vector3.Lerp(moveDirection,  new Vector3(horizontalInput, 0f, verticalInput).normalized, lerpingMovement*dt);
+        
+        
 
-
-
-        // Applique la force de déplacement seulement si le joueur touche le sol
+        // Applique la force de dÃ©placement seulement si le joueur touche le sol
         if (isGrounded)
         {
-            rb.MovePosition(rb.position + transform.TransformDirection(moveDirection) * speed * dt);
+            if (inputMovement.magnitude > 0)
+            {
+                rb.AddForce((moveDirection * acceleration) * dt);
+                float clampX = Mathf.Clamp(rb.velocity.x, -maxSpeed.x, maxSpeed.x);
+                float clampY = Mathf.Clamp(rb.velocity.y, -maxSpeed.y, maxSpeed.y);
+                float clampZ = Mathf.Clamp(rb.velocity.z, -maxSpeed.z, maxSpeed.z);
+                
+                rb.velocity = new Vector3(clampX, clampY, clampZ);
+            }
+            else
+            {
+                rb.velocity = Vector3.Lerp(rb.velocity,Vector3.zero,decreaseMovement*dt);
+            }
+            
+
+            transform.up = Vector3.up;
+
+            transform.forward = moveDirection.normalized;
         }
-
-        transform.up = Vector3.up;
-
     }
 
     private void OnInputMove(Vector2 input)
