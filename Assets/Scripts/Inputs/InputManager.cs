@@ -39,6 +39,7 @@ public class InputManager : MonoBehaviour
         gameControl.Game.TouchPressed.canceled += ctx => OnTouchEnd(ctx);
 
         gameControl.Game.Move.performed += ctx => OnMove(ctx);
+        gameControl.Game.Move.canceled += ctx => OnMove(ctx);
     }
 
     private void OnTouchStart(InputAction.CallbackContext context)
