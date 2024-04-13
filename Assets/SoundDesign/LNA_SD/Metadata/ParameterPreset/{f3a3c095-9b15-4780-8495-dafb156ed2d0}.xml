@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{f3a3c095-9b15-4780-8495-dafb156ed2d0}">
+		<property name="name">
+			<value>RadioPlaylist</value>
+		</property>
+		<relationship name="folder">
+			<destination>{772b00eb-6960-4d6f-887e-6be03560c2f3}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{70dd2459-96c2-447a-92c6-6c5c4ff8a919}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{70dd2459-96c2-447a-92c6-6c5c4ff8a919}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>11</value>
+		</property>
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+	</object>
+</objects>
