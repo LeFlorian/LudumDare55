@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Walk", false);
             g += gravity;
-            rb.AddForce(-Vector3.up * g * dt);
+            rb.AddForce(-Vector3.up * g * dt,ForceMode.VelocityChange);
             UpdateSound();
         }
 
