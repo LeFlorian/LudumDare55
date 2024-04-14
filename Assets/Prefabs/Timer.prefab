@@ -282,5 +282,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerDisplay: {fileID: 1673443127866435666}
-  timerDuration: 25
+  timerDuration: 50
   timerActive: 0
