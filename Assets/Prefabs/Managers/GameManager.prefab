@@ -627,6 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 7302728733903323338}
+  tolerance: 2
   allDistCumulate: 0
   numberOFGoutte: 0
   score: 0
@@ -5804,9 +5805,9 @@ Transform:
   m_GameObject: {fileID: 7302728733903323338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.93, y: 0.55, z: 2.24}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2858656003579773373}
   m_Father: {fileID: 499968012276079237}

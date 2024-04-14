@@ -2,25 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{
+    MenuPrincipal,
+    Playing,
+    End
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public GameState State;
 
     public GameObject parentObject;
     Transform[] allTesters;
 
-    public float tolerance = 2f;
+    public float tolerancePrecision = 2f;
+    public float toleranceCompletion = 90f;
+
+    public float completion;
 
     [Header("Functionnal")]
     public float allDistCumulate;
     public int numberOFGoutte;
-    public float score;
+    public float precision;
 
     List<Transform> testers = new List<Transform>();
 
     private void Awake()
     {
         Instance = this;
+
+        if (!PlayerPrefs.HasKey("bestCompletion"))
+        {
+            PlayerPrefs.SetFloat("bestCompletion", 0);
+            PlayerPrefs.SetFloat("bestPrecision", 0);
+        }
     }
 
     private void Start()
@@ -50,10 +67,10 @@ public class GameManager : MonoBehaviour
             testers.Add(minDistObject);
         }
 
-        float adding = Mathf.InverseLerp(tolerance, 0f, minDist);
+        float adding = Mathf.InverseLerp(tolerancePrecision, 0f, minDist);
 
         allDistCumulate += adding;
-        score = allDistCumulate / numberOFGoutte;
+        precision = allDistCumulate / numberOFGoutte;
 
         if (TestFinishDrawing())
             EndGame();
@@ -77,16 +94,37 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if ((float)amount/max >= 0.90f)
+        float realCompletion = (float)amount / max;
+
+        if (realCompletion >= toleranceCompletion/100f)
         {
             asFinishDrawing = true;
         }
 
+        completion = Mathf.InverseLerp(0, toleranceCompletion / 100, realCompletion);
+
         return asFinishDrawing;
     }
 
-    private void EndGame()
+    public void LaunchGame()
     {
+        State = GameState.Playing;
+    }
+
+    public void EndGame()
+    {
+        State = GameState.End;
+
+        float currentBestCompletion = PlayerPrefs.GetFloat("bestCompletion");
+
+        if (completion >= currentBestCompletion)
+        {
+            PlayerPrefs.SetFloat("bestCompletion", completion);
+            PlayerPrefs.SetFloat("bestPrecision", precision);
+        }
+
+        MenuController.instance.EndGame(completion, precision);
+
         Debug.Log("End game");
     }
 }
