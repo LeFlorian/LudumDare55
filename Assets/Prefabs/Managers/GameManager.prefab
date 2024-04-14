@@ -629,7 +629,7 @@ MonoBehaviour:
   State: 0
   parentObject: {fileID: 7302728733903323338}
   tolerancePrecision: 2
-  toleranceCompletion: 94
+  toleranceCompletion: 95
   allDistCumulate: 0
   numberOFGoutte: 0
   precision: 0

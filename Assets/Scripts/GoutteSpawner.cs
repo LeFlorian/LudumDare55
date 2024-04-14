@@ -13,8 +13,6 @@ public class GoutteSpawner : MonoBehaviour
 
     public IEnumerator SpawnGouttes()
     {
-        Debug.Log("SpawningGoutte !");
-
         while (Timer.instance.timerActive)
         {
             float size = (float)(Random.value * 0.5);

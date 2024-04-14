@@ -76,8 +76,11 @@ public class GameManager : MonoBehaviour
         allDistCumulate += adding;
         precision = allDistCumulate / numberOFGoutte;
 
-        if (TestFinishDrawing())
-            EndGame();
+        if (State != GameState.End)
+        {
+            if (TestFinishDrawing())
+                EndGame();
+        }
     }
 
     private bool TestFinishDrawing()
@@ -114,6 +117,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("LaunchGame");
 
+        precision = 0;
+        completion = 0;
+
+
         State = GameState.Playing;
 
         Transform[] gouttes = goutteCollector.GetComponentsInChildren<Transform>();
@@ -128,13 +135,15 @@ public class GameManager : MonoBehaviour
 
         Timer.instance.StartTimer();
 
-       StartCoroutine(FindAnyObjectByType<GoutteSpawner>().SpawnGouttes());
+        StartCoroutine(FindAnyObjectByType<GoutteSpawner>().SpawnGouttes());
 
-        Debug.Log("Finish launch");
+
     }
 
     public void EndGame()
     {
+        
+
         Timer.instance.StopTimer();
         State = GameState.End;
 
