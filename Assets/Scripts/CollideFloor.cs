@@ -9,12 +9,16 @@ public class CollideFloor : MonoBehaviour
     {
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Goutte")
         {
-            Rigidbody rb = GetComponent<Rigidbody>();
 
+            Debug.Log(other.gameObject.tag);
+            
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, -rb.velocity, out hit))
+            if (Physics.Raycast(transform.position, Vector3.up, out hit))
             {
-                transform.position = hit.point;
+                if (other.gameObject.tag != "Player" && other.gameObject.tag != "Goutte")
+                {
+                    transform.position = hit.point;
+                }
             }
 
 
