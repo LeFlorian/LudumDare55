@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject goutteCollector;
 
+    public Mover moverGlass;
+
     private void Awake()
     {
         Instance = this;
@@ -117,9 +119,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("LaunchGame");
 
+        moverGlass.ReturnBase();
         precision = 0;
         completion = 0;
-
+        allDistCumulate = 0;
+        numberOFGoutte = 0;
+        testers.Clear();
 
         State = GameState.Playing;
 
@@ -142,8 +147,13 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        
+        StartCoroutine(EndGameCoroutine());
 
+        
+    }
+
+    IEnumerator EndGameCoroutine()
+    {
         Timer.instance.StopTimer();
         State = GameState.End;
 
@@ -159,9 +169,18 @@ public class GameManager : MonoBehaviour
                 if (precision > currentBestPrecision)
                     PlayerPrefs.SetFloat("bestPrecision", precision);
             }
+            else
+            {
+                PlayerPrefs.SetFloat("bestPrecision", precision);
+            }
         }
 
+        if (completion > 0.8f)
+            yield return StartCoroutine(moverGlass.moving());
+
         MenuController.instance.EndGame(completion, precision);
+
+
 
         Debug.Log("End game");
     }
