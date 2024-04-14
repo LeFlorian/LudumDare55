@@ -318,5 +318,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gouttes: {fileID: 4361058865230357899, guid: 2909c005b090ed941842323c90bf5627, type: 3}
-  waitTime: 0.1
-  playerRB: {fileID: 0}
+  waitTime: 0
+  playerRB: {fileID: -1688303540292561135}
