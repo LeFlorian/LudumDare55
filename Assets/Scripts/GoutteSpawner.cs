@@ -19,7 +19,7 @@ public class GoutteSpawner : MonoBehaviour
         while (true)
         {
             float size = (float)(Random.value * 0.5);
-            Vector3 goutteSize = new Vector3(size, size, size);
+            Vector3 goutteSize = new Vector3(size, (float)0.1, size);
             yield return new WaitForSeconds(waitTime); 
             GameObject newGoutte = Instantiate(gouttes);
             newGoutte.transform.localScale = goutteSize;
