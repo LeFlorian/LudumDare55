@@ -9,14 +9,18 @@ public class GoutteSpawner : MonoBehaviour
 {
     public GameObject gouttes;
     public float waitTime;
-    public Rigidbody playerRB; 
+    public Rigidbody playerRB;
+    private bool runningRoutine = false;
+    private IEnumerator _enumerator; 
     private void Start()
     {
-        StartCoroutine(SpawnGouttes()); 
+        _enumerator = SpawnGouttes();
     }
+
     IEnumerator SpawnGouttes()
     {
-        while (true)
+        runningRoutine = true;
+        while (Timer.instance.timerActive)
         {
             float size = (float)(Random.value * 0.5);
             Vector3 goutteSize = new Vector3(size, (float)0.1, size);
@@ -26,6 +30,16 @@ public class GoutteSpawner : MonoBehaviour
             newGoutte.transform.position = transform.position; 
             
             newGoutte.GetComponent<Rigidbody>().AddForce(transform.forward * (Random.value * 100) + playerRB.velocity);
+        }
+
+        runningRoutine = false; 
+    }
+
+    private void Update()
+    {
+        if (!runningRoutine)
+        {
+            StartCoroutine(_enumerator);
         }
     }
 }
