@@ -58,8 +58,8 @@ Transform:
   m_GameObject: {fileID: 2021164326023145316}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.452, y: 0.548, z: 0}
-  m_LocalScale: {x: 0.30539, y: 0.15417995, z: 0.5673}
+  m_LocalPosition: {x: 0, y: 0.33, z: 0.44}
+  m_LocalScale: {x: 0.6, y: 0.24, z: 0.37}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1271256898835504028}
@@ -150,6 +150,7 @@ Transform:
   m_Children:
   - {fileID: 5638927629942486711}
   - {fileID: 3512693458715422328}
+  - {fileID: 1277349667915153020}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7549574923272890721
@@ -224,7 +225,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -264,10 +265,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c11102f1fa00244a9faf79a9203aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  lerpingMovement: 1
-  jumpForce: 10
+  maxSpeed: {x: 2, y: 500, z: 2}
+  acceleration: 1000
+  lerpingMovement: 3
   groundCheck: {fileID: 5638927629942486711}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 1
+  decreaseMovement: 10
+  lerpDirection: 30
+  gravity: 9.81
+--- !u!1 &6506370186841171557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1277349667915153020}
+  - component: {fileID: 6514776813641976024}
+  m_Layer: 0
+  m_Name: Goutte_Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1277349667915153020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6506370186841171557}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.16, z: 1.21}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1271256898835504028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6514776813641976024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6506370186841171557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8b24222543540489a0cbf729c36dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gouttes: {fileID: 4361058865230357899, guid: 2909c005b090ed941842323c90bf5627, type: 3}
+  waitTime: 0.1
