@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     List<Transform> testers = new List<Transform>();
 
+    public GameObject goutteCollector;
+
     private void Awake()
     {
         Instance = this;
@@ -42,6 +44,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         allTesters = parentObject.GetComponentsInChildren<Transform>();
+
+        goutteCollector = new GameObject();
+        goutteCollector.name = "goutteCollector";
     }
 
     public void AddingScoreByPosition(Vector3 pos)
@@ -71,8 +76,11 @@ public class GameManager : MonoBehaviour
         allDistCumulate += adding;
         precision = allDistCumulate / numberOFGoutte;
 
-        if (TestFinishDrawing())
-            EndGame();
+        if (State != GameState.End)
+        {
+            if (TestFinishDrawing())
+                EndGame();
+        }
     }
 
     private bool TestFinishDrawing()
@@ -107,14 +115,35 @@ public class GameManager : MonoBehaviour
 
     public void LaunchGame()
     {
+        Debug.Log("LaunchGame");
+
+        precision = 0;
+        completion = 0;
+
+
         State = GameState.Playing;
+
+        Transform[] gouttes = goutteCollector.GetComponentsInChildren<Transform>();
+        foreach (Transform t in gouttes)
+        {
+            if (t.gameObject != goutteCollector)
+            {
+
+                Destroy(t.gameObject);
+            }
+        }
+
         Timer.instance.StartTimer();
 
-       StartCoroutine( FindAnyObjectByType<GoutteSpawner>()._enumerator);
+        StartCoroutine(FindAnyObjectByType<GoutteSpawner>().SpawnGouttes());
+
+
     }
 
     public void EndGame()
     {
+        
+
         Timer.instance.StopTimer();
         State = GameState.End;
 
