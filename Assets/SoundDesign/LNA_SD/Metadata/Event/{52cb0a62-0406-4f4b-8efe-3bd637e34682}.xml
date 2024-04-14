@@ -59,13 +59,19 @@
 			<destination>{fe6db149-d6fe-46a6-bfdd-491f2a2fea83}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{8e6f7017-bbca-4ab7-9e03-f62002018587}" />
+	<object class="EventAutomatableProperties" id="{8e6f7017-bbca-4ab7-9e03-f62002018587}">
+		<property name="priority">
+			<value>1</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{3644d6bf-eb28-4a2d-8651-8069c51ca7a4}" />
 	<object class="GroupTrack" id="{62ec0c70-b41b-4080-b5b7-ebd7c830a9cf}">
 		<relationship name="modules">
 			<destination>{d9b0dbc8-1fbb-4b23-a2c5-abb36c4c07f8}</destination>
 			<destination>{4d73af33-bc2f-4ba7-a7b7-3d3929a8c072}</destination>
 			<destination>{f6e5c760-7407-4949-b8d9-eeef12a29582}</destination>
+			<destination>{19b738bc-da6c-4221-88fb-e82a023ef0a7}</destination>
+			<destination>{ab063b80-e2ea-46be-a506-02d8e6c8c592}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{ef1671cb-069c-45b1-a13d-37d79e75a3f3}</destination>
@@ -81,6 +87,8 @@
 			<destination>{d9b0dbc8-1fbb-4b23-a2c5-abb36c4c07f8}</destination>
 			<destination>{4d73af33-bc2f-4ba7-a7b7-3d3929a8c072}</destination>
 			<destination>{f6e5c760-7407-4949-b8d9-eeef12a29582}</destination>
+			<destination>{19b738bc-da6c-4221-88fb-e82a023ef0a7}</destination>
+			<destination>{ab063b80-e2ea-46be-a506-02d8e6c8c592}</destination>
 		</relationship>
 		<relationship name="preset">
 			<destination>{70dd2459-96c2-447a-92c6-6c5c4ff8a919}</destination>
@@ -125,6 +133,22 @@
 		</property>
 		<relationship name="event">
 			<destination>{72b69b8e-4ac3-4eff-916d-abf4d4dab81d}</destination>
+		</relationship>
+	</object>
+	<object class="EventSound" id="{19b738bc-da6c-4221-88fb-e82a023ef0a7}">
+		<property name="start">
+			<value>4</value>
+		</property>
+		<relationship name="event">
+			<destination>{4f1d6500-0b24-4cf1-b6a6-6e5ba85d23eb}</destination>
+		</relationship>
+	</object>
+	<object class="EventSound" id="{ab063b80-e2ea-46be-a506-02d8e6c8c592}">
+		<property name="start">
+			<value>5</value>
+		</property>
+		<relationship name="event">
+			<destination>{2e1b09ca-93bd-410f-9c48-7247f47f1c70}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{ef1671cb-069c-45b1-a13d-37d79e75a3f3}">
