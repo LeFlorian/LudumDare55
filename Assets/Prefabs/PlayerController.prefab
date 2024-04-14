@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 5240062726826559140}
   m_Layer: 0
   m_Name: PlayerController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,6 +272,7 @@ MonoBehaviour:
   decreaseMovement: 10
   lerpDirection: 30
   gravity: 9.81
+  rb: {fileID: 0}
 --- !u!1 &6506370186841171557
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,3 +319,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gouttes: {fileID: 4361058865230357899, guid: 2909c005b090ed941842323c90bf5627, type: 3}
   waitTime: 0.1
+  playerRB: {fileID: 0}

@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class CollideFloor : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.tag == "Floor")
+        if (other.gameObject.tag != "Player")
+        {
             Destroy(GetComponent<Rigidbody>());
+            Destroy(GetComponent<Collider>());
+
+        }
     }
 }
