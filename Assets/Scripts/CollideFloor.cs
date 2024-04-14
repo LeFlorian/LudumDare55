@@ -7,15 +7,12 @@ public class CollideFloor : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Goutte")
+        if (other.gameObject.tag == "Floor")
         {
-
-            Debug.Log(other.gameObject.name);
-            
             RaycastHit hit;
             if (Physics.Raycast(transform.position, Vector3.up, out hit))
             {
-                if (other.gameObject.tag != "Player" && other.gameObject.tag != "Goutte")
+                if (other.gameObject.tag == "Floor")
                 {
                     transform.position = hit.point;
                 }
@@ -24,7 +21,7 @@ public class CollideFloor : MonoBehaviour
             {
                 if (Physics.Raycast(transform.position, -Vector3.up, out hit))
                 {
-                    if (other.gameObject.tag != "Player" && other.gameObject.tag != "Goutte")
+                    if (other.gameObject.tag == "Floor")
                     {
                         transform.position = hit.point;
                     }
