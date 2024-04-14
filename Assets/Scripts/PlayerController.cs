@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private InputManager im;
 
+    private EventInstance playerFootsteps;
 
     void Start()
     {
@@ -34,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
 
         rb = GetComponent<Rigidbody>();
+
+        playerFootsteps = AudioManager.instance.createInstance(FMODEvents.instance.playerFootsteps);
     }
 
     void FixedUpdate()
@@ -66,15 +71,14 @@ public class PlayerController : MonoBehaviour
                 float clampZ = Mathf.Clamp(rb.velocity.z, -maxSpeed.z, maxSpeed.z);
 
                 rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(clampX, clampY, clampZ), decreaseMovement * dt);
-
-
-
+                UpdateSound();
             }
             else
             {
                 animator.SetBool("Walk", false);
                 rb.velocity = Vector3.Lerp(rb.velocity, gravityMotion, dt * decreaseMovement);
 
+                UpdateSound();
             }
         }
         else
@@ -82,13 +86,15 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Walk", false);
             g += gravity;
             rb.AddForce(-Vector3.up * g * dt);
-
+            UpdateSound();
         }
 
         transform.up = Vector3.Lerp(transform.up, Vector3.up, lerpDirection * dt);
 
         if (moveDirection != Vector3.zero)
             transform.forward = Vector3.Lerp(transform.forward, moveDirection.normalized, lerpDirection*dt);
+
+        UpdateSound();
     }
 
     private void TestGround()
@@ -112,5 +118,22 @@ public class PlayerController : MonoBehaviour
     private void OnInputMove(Vector2 input)
     {
         inputMovement = input;
+    }
+
+    private void UpdateSound()
+    {
+        if (rb.velocity.x != 0 && isGrounded)
+        {
+            PLAYBACK_STATE playbackState;
+            playerFootsteps.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerFootsteps.start();
+            }
+        }
+        else
+        {
+            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+        }
     }
 }
