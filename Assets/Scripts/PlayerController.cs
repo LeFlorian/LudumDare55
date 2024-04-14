@@ -9,15 +9,17 @@ public class PlayerController : MonoBehaviour
 
     public float lerpingMovement;
 
-    public float jumpForce = 10f; // Force de saut du joueur
     public Transform groundCheck; // Référence au GameObject qui vérifie si le joueur touche le sol
-    public LayerMask groundMask; // Masque de la couche représentant le sol
 
     Vector2 inputMovement;
     Vector3 moveDirection;
 
     public float decreaseMovement = 2;
-    
+
+    public float lerpDirection = 20;
+
+    public float gravity = 9.81f;
+    private float g;
     
     private Rigidbody rb;
     private bool isGrounded;
@@ -39,37 +41,65 @@ public class PlayerController : MonoBehaviour
     {
         float dt = Time.fixedDeltaTime;
 
-        // Vérifie si le joueur touche le sol
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundMask);
-
         // Déplacement horizontal
         float horizontalInput = inputMovement.x;
         float verticalInput = inputMovement.y;
         moveDirection = Vector3.Lerp(moveDirection,  new Vector3(horizontalInput, 0f, verticalInput).normalized, lerpingMovement*dt);
-        
-        
+
+        TestGround();
+
+        g = gravity;
 
         // Applique la force de déplacement seulement si le joueur touche le sol
         if (isGrounded)
         {
             if (inputMovement.magnitude > 0)
             {
-                rb.AddForce((moveDirection * acceleration) * dt);
+                Vector3 gravityMotion = g * -Vector3.up;
+
+                rb.AddForce((moveDirection * acceleration + gravityMotion) * dt);
                 float clampX = Mathf.Clamp(rb.velocity.x, -maxSpeed.x, maxSpeed.x);
                 float clampY = Mathf.Clamp(rb.velocity.y, -maxSpeed.y, maxSpeed.y);
                 float clampZ = Mathf.Clamp(rb.velocity.z, -maxSpeed.z, maxSpeed.z);
                 
-                rb.velocity = new Vector3(clampX, clampY, clampZ);
+                rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(clampX, clampY, clampZ), decreaseMovement * dt);
             }
             else
             {
+
                 rb.velocity = Vector3.Lerp(rb.velocity,Vector3.zero,decreaseMovement*dt);
             }
             
+        }
+        else
+        {
 
-            transform.up = Vector3.up;
+            rb.velocity += -Vector3.up * g *dt;
 
-            transform.forward = moveDirection.normalized;
+        }
+
+
+
+        transform.up = Vector3.up;
+
+        transform.forward = Vector3.Lerp(transform.forward, moveDirection.normalized, lerpDirection*dt);
+    }
+
+    private void TestGround()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position,-Vector3.up, out hit))
+        {
+            float dist = Vector3.Distance(hit.point, transform.position);
+
+            if (dist < 1.1f)
+            {
+                isGrounded = true;
+            }
+            else
+            {
+                isGrounded = false;
+            }
         }
     }
 
