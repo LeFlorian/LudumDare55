@@ -8,7 +8,7 @@ using UnityEngine.PlayerLoop;
 
 public class Timer : MonoBehaviour
 {
-
+    public static Timer instance; 
     public TextMeshProUGUI timerDisplay;
    /*
     
@@ -17,9 +17,15 @@ public class Timer : MonoBehaviour
     private float timeS; 
     */
     
-    public float timerDuration = 20f; // Durée du timer en secondes
-    private float currentTime = 0f;
+    public float timerDuration; // Durée du timer en secondes
+    private float _currentTime;
     public bool timerActive = false;
+
+    private void Awake()
+    {
+        instance = this; 
+    }
+
     private void Start()
     {
         StartTimer();
@@ -39,13 +45,11 @@ public class Timer : MonoBehaviour
        
         if (timerActive)
         {
-            currentTime += Time.deltaTime; // Incrémente le temps écoulé depuis la dernière frame
-            timerDisplay.text = currentTime.ToString(CultureInfo.CurrentCulture).Split(",")[0];
+            _currentTime += Time.deltaTime; // Incrémente le temps écoulé depuis la dernière frame
+            timerDisplay.text = _currentTime.ToString(CultureInfo.CurrentCulture).Split(",")[0];
             // Vérifie si le temps écoulé est supérieur ou égal à la durée du timer
-            if (currentTime >= timerDuration)
+            if (_currentTime >= timerDuration)
             {
-                // Le timer est écoulé, effectuez les actions nécessaires ici
-                Debug.Log("Le timer de 20 secondes est écoulé !");
                 // Arrête le timer
                 StopTimer();
             }
@@ -58,7 +62,7 @@ public class Timer : MonoBehaviour
     {
         // Active le timer et réinitialise le temps écoulé
         timerActive = true;
-        currentTime = 0f;
+        _currentTime = 0f;
     }
 
     public void StopTimer()
