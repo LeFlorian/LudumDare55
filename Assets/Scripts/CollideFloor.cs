@@ -21,7 +21,7 @@ public class CollideFloor : MonoBehaviour
             Destroy(GetComponent<Rigidbody>());
             Destroy(GetComponent<Collider>());
 
-
+            GameManager.Instance.AddingScoreByPosition(transform.position);
 
         }
     }
