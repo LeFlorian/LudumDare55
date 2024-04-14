@@ -43,7 +43,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4200301013123907900}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -74,10 +74,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c11102f1fa00244a9faf79a9203aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: {x: 1, y: 500, z: 1}
-  acceleration: 500
+  maxSpeed: {x: 1.5, y: 500, z: 1.5}
+  acceleration: 100000
   lerpingMovement: 3
-  decreaseMovement: 10
+  decreaseMovement: 500
   lerpDirection: 30
   gravity: 9.81
   rb: {fileID: -1688303540292561135}
