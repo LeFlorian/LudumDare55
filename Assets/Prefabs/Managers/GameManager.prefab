@@ -629,11 +629,12 @@ MonoBehaviour:
   State: 0
   parentObject: {fileID: 7302728733903323338}
   tolerancePrecision: 2
-  toleranceCompletion: 95
-  completion: 0
+  toleranceCompletion: 94
   allDistCumulate: 0
   numberOFGoutte: 0
   precision: 0
+  completion: 0
+  goutteCollector: {fileID: 0}
 --- !u!1 &783684305443152733
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,17 +10,11 @@ public class GoutteSpawner : MonoBehaviour
     public GameObject gouttes;
     public float waitTime;
     public Rigidbody playerRB;
-    private bool runningRoutine = false;
-    public IEnumerator _enumerator;
 
-    private void Start()
+    public IEnumerator SpawnGouttes()
     {
-        _enumerator = SpawnGouttes();
-    }
+        Debug.Log("SpawningGoutte !");
 
-    IEnumerator SpawnGouttes()
-    {
-        runningRoutine = true;
         while (Timer.instance.timerActive)
         {
             float size = (float)(Random.value * 0.5);
@@ -28,12 +22,11 @@ public class GoutteSpawner : MonoBehaviour
             yield return new WaitForSeconds(waitTime); 
             GameObject newGoutte = Instantiate(gouttes);
             newGoutte.transform.localScale = goutteSize;
-            newGoutte.transform.position = transform.position; 
+            newGoutte.transform.position = transform.position;
+            newGoutte.transform.parent = GameManager.Instance.goutteCollector.transform;
             
             newGoutte.GetComponent<Rigidbody>().AddForce(transform.forward * (Random.value * 100) + playerRB.velocity);
         }
-
-        runningRoutine = false; 
     }
 
 }
