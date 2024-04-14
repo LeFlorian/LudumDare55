@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3869889425741955223}
   m_Layer: 0
   m_Name: goutte
-  m_TagString: Untagged
+  m_TagString: Goutte
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

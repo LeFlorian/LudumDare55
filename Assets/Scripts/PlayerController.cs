@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public float gravity = 9.81f;
     private float g;
     
-    private Rigidbody rb;
+    public Rigidbody rb;
     private bool isGrounded;
 
 
