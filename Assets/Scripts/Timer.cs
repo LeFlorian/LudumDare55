@@ -28,7 +28,6 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
-        StartTimer();
 
     }
 
@@ -50,8 +49,7 @@ public class Timer : MonoBehaviour
             // Vérifie si le temps écoulé est supérieur ou égal à la durée du timer
             if (_currentTime >= timerDuration)
             {
-                // Arrête le timer
-                StopTimer();
+                GameManager.Instance.EndGame();
             }
         }
         

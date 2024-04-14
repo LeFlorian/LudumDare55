@@ -20,12 +20,11 @@ public class GameManager : MonoBehaviour
     public float tolerancePrecision = 2f;
     public float toleranceCompletion = 90f;
 
-    public float completion;
-
     [Header("Functionnal")]
     public float allDistCumulate;
     public int numberOFGoutte;
     public float precision;
+    public float completion;
 
     List<Transform> testers = new List<Transform>();
 
@@ -109,18 +108,28 @@ public class GameManager : MonoBehaviour
     public void LaunchGame()
     {
         State = GameState.Playing;
+        Timer.instance.StartTimer();
+
+       StartCoroutine( FindAnyObjectByType<GoutteSpawner>()._enumerator);
     }
 
     public void EndGame()
     {
+        Timer.instance.StopTimer();
         State = GameState.End;
 
         float currentBestCompletion = PlayerPrefs.GetFloat("bestCompletion");
+        float currentBestPrecision = PlayerPrefs.GetFloat("bestPrecision");
 
         if (completion >= currentBestCompletion)
         {
             PlayerPrefs.SetFloat("bestCompletion", completion);
-            PlayerPrefs.SetFloat("bestPrecision", precision);
+
+            if (completion == currentBestCompletion)
+            {
+                if (precision > currentBestPrecision)
+                    PlayerPrefs.SetFloat("bestPrecision", precision);
+            }
         }
 
         MenuController.instance.EndGame(completion, precision);

@@ -11,7 +11,8 @@ public class GoutteSpawner : MonoBehaviour
     public float waitTime;
     public Rigidbody playerRB;
     private bool runningRoutine = false;
-    private IEnumerator _enumerator; 
+    public IEnumerator _enumerator;
+
     private void Start()
     {
         _enumerator = SpawnGouttes();
@@ -35,11 +36,4 @@ public class GoutteSpawner : MonoBehaviour
         runningRoutine = false; 
     }
 
-    private void Update()
-    {
-        if (!runningRoutine)
-        {
-            StartCoroutine(_enumerator);
-        }
-    }
 }

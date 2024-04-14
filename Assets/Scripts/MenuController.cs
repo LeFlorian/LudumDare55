@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,8 +26,8 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
 
-        bestCompletion.text = $"{PlayerPrefs.GetFloat("bestCompletion") * 100}%";
-        bestPrecision.text = $"{PlayerPrefs.GetFloat("bestPrecision") * 100}%";
+        bestCompletion.text = $"{FormatValue(PlayerPrefs.GetFloat("bestCompletion"))}%";
+        bestPrecision.text = $"{FormatValue(PlayerPrefs.GetFloat("bestPrecision"))}%";
     }
 
     public void Play()
@@ -46,10 +47,15 @@ public class MenuController : MonoBehaviour
 
         currentScore.SetActive(true);
 
-        currentCompletion.text = $"{completion * 100}%";
-        currentPrecision.text = $"{precision * 100}%";
+        currentCompletion.text = $"{FormatValue(completion)}%";
+        currentPrecision.text = $"{FormatValue(precision)}%";
 
-        bestCompletion.text = $"{PlayerPrefs.GetFloat("bestCompletion") * 100}%";
-        bestPrecision.text = $"{PlayerPrefs.GetFloat("bestPrecision") * 100}%";
+        bestCompletion.text = $"{FormatValue(PlayerPrefs.GetFloat("bestCompletion"))}%";
+        bestPrecision.text = $"{FormatValue(PlayerPrefs.GetFloat("bestPrecision"))}%";
+    }
+
+    private float FormatValue(float value)
+    {
+        return Mathf.Round(value * 100 * 100) / 100;
     }
 }

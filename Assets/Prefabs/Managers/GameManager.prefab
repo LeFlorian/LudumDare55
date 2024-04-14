@@ -626,11 +626,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4c71f503766104997bb8cf9311e8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: 0
   parentObject: {fileID: 7302728733903323338}
-  tolerance: 2
+  tolerancePrecision: 2
+  toleranceCompletion: 95
+  completion: 0
   allDistCumulate: 0
   numberOFGoutte: 0
-  score: 0
+  precision: 0
 --- !u!1 &783684305443152733
 GameObject:
   m_ObjectHideFlags: 0
