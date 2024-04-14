@@ -9,8 +9,6 @@ public class PlayerController : MonoBehaviour
 
     public float lerpingMovement;
 
-    public Transform groundCheck; // Référence au GameObject qui vérifie si le joueur touche le sol
-
     Vector2 inputMovement;
     Vector3 moveDirection;
 
