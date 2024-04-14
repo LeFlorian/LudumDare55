@@ -9,7 +9,7 @@ public class GoutteSpawner : MonoBehaviour
 {
     public GameObject gouttes;
     public float waitTime;
-
+    public Rigidbody playerRB; 
     private void Start()
     {
         StartCoroutine(SpawnGouttes()); 
@@ -25,7 +25,7 @@ public class GoutteSpawner : MonoBehaviour
             newGoutte.transform.localScale = goutteSize;
             newGoutte.transform.position = transform.position; 
             
-            newGoutte.GetComponent<Rigidbody>().AddForce(transform.forward * (Random.value * 100));
+            newGoutte.GetComponent<Rigidbody>().AddForce(transform.forward * (Random.value * 100) + playerRB.velocity);
         }
     }
 }

@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public float decreaseMovement = 2;
     
     
-    private Rigidbody rb;
+    public Rigidbody rb;
     private bool isGrounded;
 
 
