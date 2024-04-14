@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (completion > 0.5f)
+        if (completion > 0.8f)
             yield return StartCoroutine(moverGlass.moving());
 
         MenuController.instance.EndGame(completion, precision);
