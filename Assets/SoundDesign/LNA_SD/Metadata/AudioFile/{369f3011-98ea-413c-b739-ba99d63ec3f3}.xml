@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{369f3011-98ea-413c-b739-ba99d63ec3f3}">
+		<property name="assetPath">
+			<value>MusicTroll.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>12.923083333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e5b2bbb6-f4ed-44fd-b0e3-4f5e80d5c580}</destination>
+		</relationship>
+	</object>
+</objects>
