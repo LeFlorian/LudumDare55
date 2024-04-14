@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private InputManager im;
 
+    private EventInstance playerFootsteps;
 
     void Start()
     {
@@ -35,6 +38,8 @@ public class PlayerController : MonoBehaviour
 
 
         rb = GetComponent<Rigidbody>();
+
+        playerFootsteps = AudioManager.instance.createInstance(FMODEvents.instance.playerFootsteps);
     }
 
     void FixedUpdate()
@@ -63,19 +68,21 @@ public class PlayerController : MonoBehaviour
                 float clampZ = Mathf.Clamp(rb.velocity.z, -maxSpeed.z, maxSpeed.z);
                 
                 rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(clampX, clampY, clampZ), decreaseMovement * dt);
+                UpdateSound();
             }
             else
             {
 
                 rb.velocity = Vector3.Lerp(rb.velocity,Vector3.zero,decreaseMovement*dt);
+                UpdateSound();
             }
             
         }
         else
         {
 
-            rb.velocity += -Vector3.up * g *dt;
-
+            rb.velocity += -Vector3.up * (g * dt);
+            UpdateSound();
         }
 
 
@@ -83,6 +90,9 @@ public class PlayerController : MonoBehaviour
         transform.up = Vector3.up;
 
         transform.forward = Vector3.Lerp(transform.forward, moveDirection.normalized, lerpDirection*dt);
+        
+        UpdateSound();
+       
     }
 
     private void TestGround()
@@ -106,5 +116,22 @@ public class PlayerController : MonoBehaviour
     private void OnInputMove(Vector2 input)
     {
         inputMovement = input;
+    }
+
+    private void UpdateSound()
+    {
+        if (rb.velocity.x != 0 && isGrounded)
+        {
+            PLAYBACK_STATE playbackState;
+            playerFootsteps.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerFootsteps.start();
+            }
+        }
+        else
+        {
+            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+        }
     }
 }
