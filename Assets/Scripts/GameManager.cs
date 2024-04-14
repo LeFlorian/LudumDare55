@@ -117,9 +117,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("LaunchGame");
 
+
         precision = 0;
         completion = 0;
-
+        allDistCumulate = 0;
+        numberOFGoutte = 0;
+        testers.Clear();
 
         State = GameState.Playing;
 
@@ -159,10 +162,16 @@ public class GameManager : MonoBehaviour
                 if (precision > currentBestPrecision)
                     PlayerPrefs.SetFloat("bestPrecision", precision);
             }
+            else
+            {
+                PlayerPrefs.SetFloat("bestPrecision", precision);
+            }
         }
 
         MenuController.instance.EndGame(completion, precision);
 
-        Debug.Log("End game");
+
+
+    Debug.Log("End game");
     }
 }
