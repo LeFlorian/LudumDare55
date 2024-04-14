@@ -26,8 +26,8 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
 
-        bestCompletion.text = $"{FormatValue(PlayerPrefs.GetFloat("bestCompletion"))}%";
-        bestPrecision.text = $"{FormatValue(PlayerPrefs.GetFloat("bestPrecision"))}%";
+        bestCompletion.text = $"Completion: {FormatValue(PlayerPrefs.GetFloat("bestCompletion"))}%";
+        bestPrecision.text = $"Precision:  {FormatValue(PlayerPrefs.GetFloat("bestPrecision"))}%";
     }
 
     public void Play()
@@ -47,11 +47,11 @@ public class MenuController : MonoBehaviour
 
         currentScore.SetActive(true);
 
-        currentCompletion.text = $"{FormatValue(completion)}%";
-        currentPrecision.text = $"{FormatValue(precision)}%";
+        currentCompletion.text = $"Completion: {FormatValue(completion)}%";
+        currentPrecision.text = $"Precision:  {FormatValue(precision)}%";
 
-        bestCompletion.text = $"{FormatValue(PlayerPrefs.GetFloat("bestCompletion"))}%";
-        bestPrecision.text = $"{FormatValue(PlayerPrefs.GetFloat("bestPrecision"))}%";
+        bestCompletion.text = $"Completion:  {FormatValue(PlayerPrefs.GetFloat("bestCompletion"))}%";
+        bestPrecision.text = $"Precision:  {FormatValue(PlayerPrefs.GetFloat("bestPrecision"))}%";
     }
 
     private float FormatValue(float value)
